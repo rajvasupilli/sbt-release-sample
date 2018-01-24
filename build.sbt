@@ -14,8 +14,6 @@ credentials += Credentials(Path.userHome / "pgp.credentials")
 
 useGpg := true
 
-useGpgAgent := true
-
 pgpSecretRing := Path.userHome / ".gnupg/secring.gpg"
 
 pgpPublicRing := Path.userHome / ".gnupg/pubring.gpg"
