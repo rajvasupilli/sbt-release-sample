@@ -12,7 +12,7 @@ moduleName := "test-release"
 credentials += Credentials(Path.userHome / "sonatype.credentials")
 credentials += Credentials(Path.userHome / "pgp.credentials")
 
-useGpg := true
+useGpg := false
 
 pgpSecretRing := Path.userHome / ".gnupg/secring.gpg"
 
@@ -62,6 +62,7 @@ releaseProcess := Seq[ReleaseStep](
   tagRelease,                             // : ReleaseStep
   ReleaseStep(action = Command.process(s"""sonatypeOpen "${organization.value}" "${name.value} v${version.value}"""", _)),
   ReleaseStep(action = Command.process("publishSigned", _)),
+  ReleaseStep(action = Command.process("sonatypeRelease", _)),
   setNextVersion,                         // : ReleaseStep
   commitNextVersion,                      // : ReleaseStep
   pushChanges
