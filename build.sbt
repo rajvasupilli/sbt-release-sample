@@ -12,7 +12,9 @@ moduleName := "test-release"
 credentials += Credentials(Path.userHome / "sonatype.credentials")
 credentials += Credentials(Path.userHome / "pgp.credentials")
 
-useGpg := false
+useGpg := true
+
+useGpgAgent := true
 
 pgpSecretRing := Path.userHome / ".gnupg/secring.gpg"
 
