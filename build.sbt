@@ -1,4 +1,5 @@
 import ReleaseTransformations._
+import com.typesafe.sbt.pgp
 
 name := "sbt-release-sample"
 
@@ -68,3 +69,6 @@ releaseProcess := Seq[ReleaseStep](
 )
 
 releaseUseGlobalVersion := false
+
+PgpKeys.pgpSelectPassphrase := pgpPassphrase.value orElse
+  (Credentials.forHost(credentials.value, "pgp") map (_.passwd.toCharArray))
