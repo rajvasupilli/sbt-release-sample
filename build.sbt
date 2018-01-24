@@ -7,7 +7,7 @@ organization := "uk.co.callhandling"
 
 moduleName := "test-release"
 
-version := ".01.01-SNAPSHOT"
+version := "0.01.01-SNAPSHOT"
 
 credentials += Credentials(Path.userHome / "pgp.credentials")
 
@@ -57,8 +57,10 @@ publishMavenStyle := true
 
 publishArtifact in Test := false
 
-releaseProcess := Seq[ReleaseStep](
+/*releaseProcess := Seq[ReleaseStep](
   ReleaseStep(action = Command.process(s"""sonatypeOpen "${organization.value}" "${name.value} v${version.value}"""", _)),
 
   ReleaseStep(action = Command.process("publishSigned", _))
-)
+)*/
+
+releaseUseGlobalVersion := false
