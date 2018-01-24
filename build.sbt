@@ -69,6 +69,6 @@ releaseProcess := Seq[ReleaseStep](
 )
 
 releaseUseGlobalVersion := false
-
+/*
 PgpKeys.pgpSelectPassphrase in Global := pgpPassphrase.value orElse
-  (Credentials.forHost(credentials.value, "pgp") map (_.passwd.toCharArray))
+  (Credentials.forHost(credentials.value, "pgp") map (_.passwd.toCharArray))*/
