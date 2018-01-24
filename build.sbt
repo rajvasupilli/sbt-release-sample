@@ -8,10 +8,7 @@ organization := "uk.co.callhandling"
 
 moduleName := "test-release"
 
-credentials += Credentials(Path.userHome / "pgp.credentials")
-
 credentials += Credentials(Path.userHome / "sonatype.credentials")
-
 
 useGpg := true
 
@@ -27,11 +24,8 @@ publishTo := {
     Some("releases" at nexus + "service/local/staging/deploy/maven2")
 }
 
-
-
 pomIncludeRepository := { (repo: MavenRepository) =>
-  println(repo.root)
-  repo.root.startsWith("file:")
+   repo.root.startsWith("file:")
 }
 
 licenses := Seq("Apache 2.0" -> url("https://www.apache.org/licenses/LICENSE-2.0"))
