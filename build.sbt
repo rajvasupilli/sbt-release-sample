@@ -1,3 +1,4 @@
+import ReleaseTransformations._
 
 name := "sbt-release-sample"
 
@@ -6,8 +7,6 @@ scalaVersion := "2.12.4"
 organization := "uk.co.callhandling"
 
 moduleName := "test-release"
-
-version := "0.01.01-SNAPSHOT"
 
 credentials += Credentials(Path.userHome / "pgp.credentials")
 
@@ -57,10 +56,20 @@ publishMavenStyle := true
 
 publishArtifact in Test := false
 
-/*releaseProcess := Seq[ReleaseStep](
+releaseProcess := Seq[ReleaseStep](
+  checkSnapshotDependencies,              // : ReleaseStep
+  inquireVersions,                        // : ReleaseStep
+  runClean,                               // : ReleaseStep
+  runTest,                                // : ReleaseStep
+  setReleaseVersion,                      // : ReleaseStep
+  commitReleaseVersion,                   // : ReleaseStep, performs the initial git checks
+  tagRelease,                             // : ReleaseStep
   ReleaseStep(action = Command.process(s"""sonatypeOpen "${organization.value}" "${name.value} v${version.value}"""", _)),
+  ReleaseStep(action = Command.process("publishSigned", _)),
+  setNextVersion,                         // : ReleaseStep
+  commitNextVersion,                      // : ReleaseStep
+  pushChanges
 
-  ReleaseStep(action = Command.process("publishSigned", _))
-)*/
+)
 
 releaseUseGlobalVersion := false
