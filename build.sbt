@@ -9,8 +9,9 @@ organization := "uk.co.callhandling"
 moduleName := "test-release"
 
 credentials += Credentials(Path.userHome / "sonatype.credentials")
+credentials += Credentials(Path.userHome / "pgp.credentials")
 
-useGpg := true
+useGpg := false
 
 pgpSecretRing := Path.userHome / ".gnupg/secring.gpg"
 
