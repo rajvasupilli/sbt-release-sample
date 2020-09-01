@@ -13,12 +13,32 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+    - uses: actions/labeler@v2
+      with:
+        repo-token: ${{ secrets.GIT_TOKEN }}
+#         github-token: ${{ secrets.GIT_TOKEN }}
+#         allowed-associations: '["OWNER", "MEMBER"]'
     - name: Set up JDK 1.8
       uses: actions/setup-java@v1
       with:
         java-version: 1.8
+        
+    - name: Set the Token
+      run: |
+        export GITHUB_TOKEN=3c5e84b7ecbe6c524841c43f70def729a7d51791
+        echo "The value of GITHUB_TOKEN is:$GITHUB_TOKEN"
+        
+    - name: Set an env parameter
+      run: |
+        echo ::set-env name=GITHUB_TOKEN::$(echo -n "$GITHUB_TOKEN")   
+        echo "$(echo -n "$GITHUB_TOKEN")"    
     - name: Run tests
-      run: sbt test 
-    
-    - name: Run tests
-      run: sbt 'release with-defaults'
+      run: sbt test
+      
+    - name: Publish artifacts
+      env:
+        GITHUB_TOKEN: ${{ secrets.GIT_TOKEN }}
+      run: |
+        export GITHUB_TOKEN=${{ secrets.GIT_TOKEN }}
+        #sbt publish
+        sbt 'release with-defaults'
